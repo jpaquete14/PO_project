@@ -2,7 +2,10 @@ package m19.app.main;
 
 
 // FIXME import core concepts
+import m19.LibraryManager;
+
 // FIXME import ui concepts
+import pt.tecnico.po.ui.Command;
 
 /**
  * 4.1.1. Save to file under current name (if unnamed, query for name).

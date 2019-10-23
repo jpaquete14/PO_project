@@ -1,7 +1,16 @@
 package m19;
 
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
 // FIXME import system types
 // FIXME import project (core) types
+
+import m19.exceptions.BadEntrySpecificationException;
+import m19.exceptions.FailedToOpenFileException;
+import m19.exceptions.ImportFileException;
+import m19.exceptions.MissingFileAssociationException;
+
 
 /**
  * The façade class.
@@ -11,7 +20,8 @@ public class LibraryManager {
   private Library _library;  // FIXME initialize this attribute
 
   // FIXME define other attributes
-
+  private String _filename;
+  
   // FIXME define contructor(s)
   
   // FIXME define methods

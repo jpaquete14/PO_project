@@ -1,7 +1,11 @@
 package m19.app.works;
 
 // FIXME import core concepts
+import m19.LibraryManager;
+
 // FIXME import ui concepts
+import pt.tecnico.po.ui.Command;
+import pt.tecnico.po.ui.DialogException;
 
 /**
  * 4.3.1. Display work.

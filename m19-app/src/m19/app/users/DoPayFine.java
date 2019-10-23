@@ -2,7 +2,11 @@ package m19.app.users;
 
 
 // FIXME import core concepts
+import m19.LibraryManager;
+
 // FIXME import ui concepts
+import pt.tecnico.po.ui.Command;
+import pt.tecnico.po.ui.DialogException;
 
 /**
  * 4.2.5. Settle a fine.

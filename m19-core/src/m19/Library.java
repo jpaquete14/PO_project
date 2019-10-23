@@ -1,7 +1,15 @@
 package m19;
 
+import java.io.IOException;
+import java.io.Serializable;
+
 // FIXME import system types
 // FIXME import project (core) types
+
+import m19.exceptions.BadEntrySpecificationException;
+import m19.exceptions.FailedToOpenFileException;
+import m19.exceptions.ImportFileException;
+import m19.exceptions.MissingFileAssociationException;
 
 /**
  * Class that represents the library as a whole.
