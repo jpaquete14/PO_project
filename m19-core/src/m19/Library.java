@@ -21,6 +21,17 @@ public class Library implements Serializable {
 
   // FIXME define attributes
 
+  private int _day = 0;
+  
+  private Map<Integer, Work> _works = new HashMap<Integer, Work>();
+
+  private Map<Integer, User> _users = new HashMap<Integer, User>();
+
+  private Map<Integer, User> _suspended = new HashMap<Integer, User>();
+
+  private int _userIdCounter = 0;
+  private int _workIdCounter = 0;
+
   // FIXME define contructor(s)
 
   // FIXME define methods
