@@ -34,7 +34,7 @@ public class LibraryManager {
     _library.advanceDate(days);
   }
 
-  public void registerUser(String name, String email) throws DuplicateEmailException {
+  public void registerUser(String name, String email) {
     _school.registerUser(name, email);
   }
 

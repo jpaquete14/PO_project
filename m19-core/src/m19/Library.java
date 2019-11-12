@@ -53,22 +53,23 @@ public class Library implements Serializable {
     //FIXME update deadlines
   }
   
-  public void registerUser(String name, String email) throws DuplicateEmailException {
-    if( duplicateEmail(_users, email) ) {
-      throw new DuplicateEmailException();
-    }
+  public void registerUser(String name, String email) {
+    _userIdCounter++;
     User user = new User(_userIdCounter, name, email);
     _users.put(_userIdCounter, user);
   }
 
-  public boolean duplicateEmail( Map<Integer, User> users, String email) {
-    //FIXME implement
-    return false;
-  }
-
   public String showUser(int id) {
     User user = _users.get(id);
+    return user.toString();
   }
+
+  public void addUser(String name, String email) {
+    _userIdCounter++;
+    User user = new User(_userIdCounter, name, email);
+    _users.put(_userIdCounter, user);
+  }
+
   /**
    * Read the text input file at the beginning of the program and populates the
    * instances of the various possible types (books, DVDs, users).
@@ -84,28 +85,20 @@ public class Library implements Serializable {
     try {
       BufferedReader in = new BufferedReader(new FileReader(filename));
       String s;
-      while((s = in.readline()) != null) {
+      while((s = in.readLine()) != null) {
         line++;
         String[] split = s.split(":");
         if (split[0].equals("USER")) {
-          try {
             this.addUser(split[1], split[2]);
-          } catch (DuplicateUserException e){
-            System.err.println(e);
-          }
         }
       }
       in.close();
+    } catch (BadEntrySpecificationException e) {
+      System.out.println("File" + filename + "entries not correct");
     } catch (FileNotFoundException e) {
       System.out.println("File not found: " + filename + ": " + e);
     } catch (IOException e) {
       System.out.println("IO error: " + filename + ": " + line + ": line " + e);
     }
-  }
-
-  public void addUser(String name, String email) {
-    _userIdCounter++;
-    User user = new User(_userIdCounter, name, email);
-    _users.put(_userIdCounter, user);
   }
 }
