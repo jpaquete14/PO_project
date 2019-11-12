@@ -26,6 +26,22 @@ public class LibraryManager {
   
   // FIXME define methods
 
+  public int getDate() {
+    return _library.getDate();
+  }
+
+  public void advanceDate(int days) {
+    _library.advanceDate(days);
+  }
+
+  public void registerUser(String name, String email) throws DuplicateEmailException {
+    _school.registerUser(name, email);
+  }
+
+  public String showUser(int id) {
+    return _school.showUser(id);
+  }
+
   /**
    * @throws MissingFileAssociationException
    * @throws IOException
@@ -66,5 +82,4 @@ public class LibraryManager {
       throw new ImportFileException(e);
     }
   }
-
 }

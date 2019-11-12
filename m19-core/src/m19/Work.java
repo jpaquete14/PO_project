@@ -1,6 +1,8 @@
 package m19;
 
-public abstract class Work extends Serializable {
+import java.io.Serializable;
+
+public abstract class Work implements Serializable {
 
     //Class attributes
     private static final long serialVersionUID = 202608231520L;
@@ -48,11 +50,11 @@ public abstract class Work extends Serializable {
         return _price;
     }
 
-    public void setPrice() {
+    public void setPrice(int price) {
         _price = price;
     }
 
-    public Category setCategory() {
+    public WorkCategory setCategory() {
         return _category;
     }
 
