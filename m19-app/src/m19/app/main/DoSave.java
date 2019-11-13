@@ -8,13 +8,15 @@ import m19.LibraryManager;
 
 // FIXME import ui concepts
 import pt.tecnico.po.ui.Command;
+import pt.tecnico.po.ui.Input;
+
+import m19.exceptions.MissingFileAssociationException;
 
 /**
  * 4.1.1. Save to file under current name (if unnamed, query for name).
  */
 public class DoSave extends Command<LibraryManager> {
   
-  // FIXME define input fields
   private Input<String> _file;
 
   /**
@@ -22,8 +24,7 @@ public class DoSave extends Command<LibraryManager> {
    */
   public DoSave(LibraryManager receiver) {
     super(Label.SAVE, receiver);
-    // FIXME initialize input fields
-    if (receiver.getFile() == null) {
+    if ((_receiver.getFile()) == null) {
       _file = _form.addStringInput(Message.newSaveAs());
       }
   }
@@ -31,16 +32,16 @@ public class DoSave extends Command<LibraryManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    // FIXME implement command
     try {
-      if((_receiver.getFile())==null) {
-          _form.parse();
-          _receiver.save(_file.value());
+      if((_receiver.getFile()) == null) {
+        _receiver.saveAs(_file.value());
       }
       else {
-          _receiver.save(_receiver.getFile());
+        _receiver.save();
       }
     } catch (IOException e) {
+      e.printStackTrace();
+    } catch (MissingFileAssociationException e) {
       e.printStackTrace();
     }
   }

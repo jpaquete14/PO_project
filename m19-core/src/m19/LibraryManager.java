@@ -3,6 +3,10 @@ package m19;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
 // FIXME import system types
 // FIXME import project (core) types
 
@@ -10,6 +14,8 @@ import m19.exceptions.BadEntrySpecificationException;
 import m19.exceptions.FailedToOpenFileException;
 import m19.exceptions.ImportFileException;
 import m19.exceptions.MissingFileAssociationException;
+import m19.exceptions.NoSuchUserIdException;
+import m19.exceptions.NoSuchWorkIdException;
 
 
 /**
@@ -26,6 +32,10 @@ public class LibraryManager {
   
   // FIXME define methods
 
+  public String getFile() {
+    return _filename;
+  }
+
   public int getDate() {
     return _library.getDate();
   }
@@ -35,11 +45,23 @@ public class LibraryManager {
   }
 
   public void registerUser(String name, String email) {
-    _school.registerUser(name, email);
+    _library.registerUser(name, email);
   }
 
-  public String showUser(int id) {
-    return _school.showUser(id);
+  public String showUser(int id) throws NoSuchUserIdException {
+    return _library.showUser(id);
+  }
+
+  public String showUsers() {
+    return _library.showUsers();
+  }
+
+  public String showWork (int id) throws NoSuchWorkIdException {
+    return _library.showWork(id);
+  }
+
+  public String showWorks() {
+    return _library.showWorks();
   }
 
   /**
@@ -48,7 +70,12 @@ public class LibraryManager {
    * @throws FileNotFoundException
    */
   public void save() throws MissingFileAssociationException, IOException {
-    // FIXME implement method
+    if(_filename == null) {
+      throw new MissingFileAssociationException();
+    }
+    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(_filename));
+    out.writeObject(_library);
+    out.close();
   }
 
   /**
@@ -68,7 +95,9 @@ public class LibraryManager {
    * @throws ClassNotFoundException
    */
   public void load(String filename) throws FailedToOpenFileException, IOException, ClassNotFoundException {
-    // FIXME implement method
+    ObjectInputStream in = new ObjectInputStream(new FileInputStream(_filename));
+    _library = (Library) in.readObject();
+    in.close();
   }
 
   /**

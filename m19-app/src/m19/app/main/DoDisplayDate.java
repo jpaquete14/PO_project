@@ -21,7 +21,6 @@ public class DoDisplayDate extends Command<LibraryManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    // FIXME define method
     _display.popup(Message.currentDate(_receiver.getDate()));
   }
   

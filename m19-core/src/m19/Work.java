@@ -15,10 +15,10 @@ public abstract class Work implements Serializable {
 
     private int _price;
 
-    private WorkCategory _category;
+    private String _category;
 
 
-    public Work(int id, int copiesLeft, String title, int price, WorkCategory category) {
+    public Work(int id, int copiesLeft, String title, int price, String category) {
         _id = id;
         _copiesLeft = copiesLeft;
         _title = title;
@@ -54,7 +54,7 @@ public abstract class Work implements Serializable {
         _price = price;
     }
 
-    public WorkCategory setCategory() {
+    public String getCategory() {
         return _category;
     }
 

@@ -21,7 +21,7 @@ public class DoShowUsers extends Command<LibraryManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    // FIXME implement command
+    _display.popup(_receiver.showUsers());
   }
   
 }

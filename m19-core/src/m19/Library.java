@@ -18,6 +18,9 @@ import m19.exceptions.BadEntrySpecificationException;
 import m19.exceptions.FailedToOpenFileException;
 import m19.exceptions.ImportFileException;
 import m19.exceptions.MissingFileAssociationException;
+import m19.exceptions.NoSuchWorkIdException;
+import m19.exceptions.NoSuchUserIdException;
+import m19.exceptions.NoSuchWorkIdException;
 
 /**
  * Class that represents the library as a whole.
@@ -59,15 +62,57 @@ public class Library implements Serializable {
     _users.put(_userIdCounter, user);
   }
 
-  public String showUser(int id) {
+  public String showUser(int id) throws NoSuchUserIdException {
+    if(!_users.containsKey(id)) {
+      throw new NoSuchUserIdException(id);
+    }
     User user = _users.get(id);
     return user.toString();
   }
 
-  public void addUser(String name, String email) {
+  public String showUsers() {
+    String users = "";
+    for(User u: _users.values()) {
+      users += u.toString();
+    }
+    return users;
+  }
+
+  public String showWork(int id) throws NoSuchWorkIdException {
+    if(!_works.containsKey(id)) {
+      throw new NoSuchWorkIdException(id);
+    }
+    Work work = _works.get(id);
+    return work.toString();
+  }
+
+  public String showWorks() {
+    String works = "";
+    for(Work w: _works.values()) {
+      works += w.toString();
+    }
+    return works;
+  }
+
+  public void addUser(String name, String email) throws BadEntrySpecificationException {
+    if(email.contains(" ")) {
+      throw new BadEntrySpecificationException(email);
+    }
     _userIdCounter++;
     User user = new User(_userIdCounter, name, email);
     _users.put(_userIdCounter, user);
+  }
+
+  public void addDVD(String title, String director, int price, String category, int IGAC, int copiesLeft) {
+    _workIdCounter++;
+    DVD dvd = new DVD(_workIdCounter, title, director, price, category, IGAC, copiesLeft);
+    _works.put(_workIdCounter, dvd);
+  }
+
+  public void addBook(String title, String author, int price, String category, int ISBN, int copiesLeft) {
+    _workIdCounter++;
+    Book book = new Book(_workIdCounter, title, author, price, category, ISBN, copiesLeft);
+    _works.put(_workIdCounter, book);
   }
 
   /**
@@ -89,12 +134,21 @@ public class Library implements Serializable {
         line++;
         String[] split = s.split(":");
         if (split[0].equals("USER")) {
-            this.addUser(split[1], split[2]);
+          //name, email
+          this.addUser(split[1], split[2]);
+        }
+        else if (split[0].equals("DVD")) {
+          //title, director, price, category, IGAC, copiesLeft
+          this.addDVD(split[1], split[2], Integer.parseInt(split[3]), split[4], Integer.parseInt(split[5]), Integer.parseInt(split[6]));
+        }
+        else if (split[1].equals("BOOK")) {
+          //title, author, price, category, ISBN, copiesLeft
+          this.addBook(split[1], split[2], Integer.parseInt(split[3]), split[4], Integer.parseInt(split[5]), Integer.parseInt(split[6]));
         }
       }
       in.close();
     } catch (BadEntrySpecificationException e) {
-      System.out.println("File" + filename + "entries not correct");
+      e.printStackTrace();
     } catch (FileNotFoundException e) {
       System.out.println("File not found: " + filename + ": " + e);
     } catch (IOException e) {

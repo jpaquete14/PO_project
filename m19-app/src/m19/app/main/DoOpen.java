@@ -10,6 +10,7 @@ import m19.exceptions.FailedToOpenFileException;
 // FIXME import ui concepts
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
+import pt.tecnico.po.ui.Input;
 
 
 /**
@@ -17,19 +18,14 @@ import pt.tecnico.po.ui.DialogException;
  */
 public class DoOpen extends Command<LibraryManager> {
 
-  // FIXME define input fields if needed
   private Input<String> _file;
-
-  private int _id;
 
   /**
    * @param receiver
    */
   public DoOpen(LibraryManager receiver) {
     super(Label.OPEN, receiver);
-    // FIXME initialize input fields if needed
     _file = _form.addStringInput(Message.openFile());
-    id = receiver.getId();
   }
 
   /** @see pt.tecnico.po.ui.Command#execute() */
@@ -37,9 +33,7 @@ public class DoOpen extends Command<LibraryManager> {
   public final void execute() throws DialogException {
     _form.parse();
     try {
-      // FIXME implement command
-      _display.addLine(_receiver.load(_file.value()));
-      _display.display();
+      _receiver.load(_file.value());
     } catch (FailedToOpenFileException fnfe) {
       throw new FileOpenFailedException(fnfe.getName());
     } catch (ClassNotFoundException | IOException e) {
