@@ -15,9 +15,7 @@ public class User implements Serializable {
 
     private UserState _state = new NormalUser(this);
 
-    //Counters to update the UserState
-    private int _onSchedule = 0;
-    private int _afterSchedule = 0;
+    private int _penalty = 0;
 
 
     public User(int id, String name, String email) {
@@ -45,7 +43,29 @@ public class User implements Serializable {
         _email = email;
     }
 
+    public int getPenalty() {
+        return _penalty;
+    }
+
+    public void addPenalty(int penalty) {
+        _penalty += penalty;
+    }
+
+    public void resetPenalty() {
+        _penalty = 0;
+    }
+
     protected void setState(UserState state) {
         _state = state;
     }
+
+    @Override
+    public String toString() {
+        if(this.getPenalty() == 0) {
+            return this.getId() + " - " + this.getName() + " - " + this.getEmail() + " - " + this._state.getState() + " - ACTIVO\n";
+        }
+        else {
+            return this.getId() + " - " + this.getName() + " - " + this.getEmail() + " - " + this._state.getState() + " - SUSPENSO - " + this.getPenalty() + "\n";
+        }
+    } 
 }

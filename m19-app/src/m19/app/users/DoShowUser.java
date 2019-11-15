@@ -30,6 +30,7 @@ public class DoShowUser extends Command<LibraryManager> {
   @Override
   public final void execute() throws DialogException {
     try {
+      _form.parse();
       _display.popup(_receiver.showUser(_id.value()));
     } catch (NoSuchUserIdException e) {
       throw new NoSuchUserException(_id.value());

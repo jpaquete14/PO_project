@@ -28,6 +28,7 @@ public class DoRegisterUser extends Command<LibraryManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
+    _form.parse();
     _receiver.registerUser(_name.value(), _email.value());
   }
 

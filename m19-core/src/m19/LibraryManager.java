@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 // FIXME import system types
 // FIXME import project (core) types
 
@@ -23,7 +25,7 @@ import m19.exceptions.NoSuchWorkIdException;
  */
 public class LibraryManager {
 
-  private Library _library;  // FIXME initialize this attribute
+  private Library _library = new Library();  // FIXME initialize this attribute
 
   // FIXME define other attributes
   private String _filename;
@@ -70,11 +72,14 @@ public class LibraryManager {
    * @throws FileNotFoundException
    */
   public void save() throws MissingFileAssociationException, IOException {
+    System.out.println("save");
     if(_filename == null) {
       throw new MissingFileAssociationException();
     }
-    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(_filename));
+    System.out.println("write Object");
+    ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_filename)));
     out.writeObject(_library);
+    System.out.println("Object written");
     out.close();
   }
 
@@ -84,6 +89,7 @@ public class LibraryManager {
    * @throws IOException
    */
   public void saveAs(String filename) throws MissingFileAssociationException, IOException {
+    System.out.println("saveAs");
     _filename = filename;
     save();
   }
@@ -95,9 +101,13 @@ public class LibraryManager {
    * @throws ClassNotFoundException
    */
   public void load(String filename) throws FailedToOpenFileException, IOException, ClassNotFoundException {
-    ObjectInputStream in = new ObjectInputStream(new FileInputStream(_filename));
+    System.out.println("load");
+    _filename = filename;
+    ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(_filename)));
     _library = (Library) in.readObject();
+    System.out.println("library loaded");
     in.close();
+    System.out.println("file closed");
   }
 
   /**

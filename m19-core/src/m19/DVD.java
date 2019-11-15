@@ -22,4 +22,9 @@ public class DVD extends Work {
         return _IGAC;
     }
 
+    @Override
+    public String toString() {
+        return this.getId() + " - " + this.getCopiesLeft() + " - DVD - " + this.getTitle() + " - " + this.getPrice() + " - " + this.getCategory() + " - " + this.getDirector() + " - " + this.getIGAC() + "\n";
+    }
+
 }

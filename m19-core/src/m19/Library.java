@@ -52,7 +52,7 @@ public class Library implements Serializable {
   }
 
   public void advanceDate(int days) {
-    _date = _date + days;
+    _date += days;
     //FIXME update deadlines
   }
   

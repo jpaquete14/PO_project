@@ -29,6 +29,7 @@ public class DoDisplayWork extends Command<LibraryManager> {
   @Override
   public final void execute() throws DialogException {
     try {
+      _form.parse();
       _display.popup(_receiver.showWork(_id.value()));
     } catch (NoSuchWorkIdException e) {
       throw new NoSuchWorkException(_id.value());

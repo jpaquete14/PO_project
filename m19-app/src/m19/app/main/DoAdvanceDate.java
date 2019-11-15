@@ -28,6 +28,9 @@ public class DoAdvanceDate extends Command<LibraryManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    _receiver.advanceDate(_days.value());
+    _form.parse();
+    if(_days.value() > 0) {
+      _receiver.advanceDate(_days.value());
+    }
   }
 }

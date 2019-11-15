@@ -21,4 +21,10 @@ public class Book extends Work {
     public int getISBN() {
         return _ISBN;
     }
+
+    @Override
+    public String toString() {
+        return this.getId() + " - " + this.getCopiesLeft() + " - Livro - " + this.getTitle() + " - " + this.getPrice() + " - " + this.getCategory() + " - " + this.getAuthor() + " - " + this.getISBN() + "\n";
+    }
+
 }

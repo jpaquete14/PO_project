@@ -34,6 +34,7 @@ public class DoSave extends Command<LibraryManager> {
   public final void execute() {
     try {
       if((_receiver.getFile()) == null) {
+        _form.parse();
         _receiver.saveAs(_file.value());
       }
       else {
