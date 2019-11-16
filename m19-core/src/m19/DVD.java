@@ -8,8 +8,8 @@ public class DVD extends Work {
 
     private int _IGAC;
 
-    public DVD(int id, String title, String director, int price, String category, int IGAC, int copiesLeft) { 
-        super(id, copiesLeft, title, price, category);
+    public DVD(int id, String title, String director, int price, String category, int IGAC, int copies) { 
+        super(id, copies, title, price, category);
         _director = director;
         _IGAC = IGAC;
     }
@@ -24,7 +24,7 @@ public class DVD extends Work {
 
     @Override
     public String toString() {
-        return this.getId() + " - " + this.getCopiesLeft() + " - DVD - " + this.getTitle() + " - " + this.getPrice() + " - " + this.getCategory() + " - " + this.getDirector() + " - " + this.getIGAC() + "\n";
+        return this.getId() + " - " + this.getCopies() + " de " + this.getCopiesLeft() + " - DVD - " + this.getTitle() + " - " + this.getPrice() + " - " + this.getCategory() + " - " + this.getDirector() + " - " + this.getIGAC() + "\n";
     }
 
 }

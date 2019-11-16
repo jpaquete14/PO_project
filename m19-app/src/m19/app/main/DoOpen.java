@@ -35,7 +35,7 @@ public class DoOpen extends Command<LibraryManager> {
     try {
       _receiver.load(_file.value());
     } catch (FailedToOpenFileException fnfe) {
-      throw new FileOpenFailedException(fnfe.getName());
+      throw new FileOpenFailedException(_file.value());
     } catch (ClassNotFoundException | IOException e) {
       e.printStackTrace();
     }

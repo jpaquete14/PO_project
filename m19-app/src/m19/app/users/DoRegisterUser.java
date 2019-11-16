@@ -29,7 +29,7 @@ public class DoRegisterUser extends Command<LibraryManager> {
   @Override
   public final void execute() {
     _form.parse();
-    _receiver.registerUser(_name.value(), _email.value());
+    _display.popup(Message.userRegistrationSuccessful(_receiver.registerUser(_name.value(), _email.value())));
   }
 
 }

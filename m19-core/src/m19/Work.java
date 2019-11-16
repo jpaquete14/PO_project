@@ -9,6 +9,8 @@ public abstract class Work implements Serializable {
 
     private int _id;
 
+    private int _copies;
+
     private int _copiesLeft;
 
     private String _title;
@@ -18,9 +20,10 @@ public abstract class Work implements Serializable {
     private String _category;
 
 
-    public Work(int id, int copiesLeft, String title, int price, String category) {
+    public Work(int id, int copies, String title, int price, String category) {
         _id = id;
-        _copiesLeft = copiesLeft;
+        _copies = copies;
+        _copiesLeft = _copies;
         _title = title;
         _price = price;
         _category = category;
@@ -28,6 +31,10 @@ public abstract class Work implements Serializable {
 
     public int getId() {
         return _id;
+    }
+
+    public int getCopies() {
+        return _copies;
     }
 
     public int getCopiesLeft() {

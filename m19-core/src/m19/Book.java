@@ -8,8 +8,8 @@ public class Book extends Work {
 
     private int _ISBN;
 
-    public Book(int id,String title, String author, int price, String category, int ISBN, int copiesLeft) {
-        super(id, copiesLeft, title, price, category);
+    public Book(int id,String title, String author, int price, String category, int ISBN, int copies) {
+        super(id, copies, title, price, category);
         _author = author;
         _ISBN = ISBN;
     }
@@ -24,7 +24,7 @@ public class Book extends Work {
 
     @Override
     public String toString() {
-        return this.getId() + " - " + this.getCopiesLeft() + " - Livro - " + this.getTitle() + " - " + this.getPrice() + " - " + this.getCategory() + " - " + this.getAuthor() + " - " + this.getISBN() + "\n";
+        return this.getId() + " - " + this.getCopies() + " de " + this.getCopiesLeft() + " - Livro - " + this.getTitle() + " - " + this.getPrice() + " - " + this.getCategory() + " - " + this.getAuthor() + " - " + this.getISBN() + "\n";
     }
 
 }

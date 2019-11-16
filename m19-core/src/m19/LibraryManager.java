@@ -5,8 +5,11 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 // FIXME import system types
@@ -46,8 +49,8 @@ public class LibraryManager {
     _library.advanceDate(days);
   }
 
-  public void registerUser(String name, String email) {
-    _library.registerUser(name, email);
+  public int registerUser(String name, String email) {
+    return _library.registerUser(name, email);
   }
 
   public String showUser(int id) throws NoSuchUserIdException {
@@ -72,14 +75,11 @@ public class LibraryManager {
    * @throws FileNotFoundException
    */
   public void save() throws MissingFileAssociationException, IOException {
-    System.out.println("save");
     if(_filename == null) {
       throw new MissingFileAssociationException();
     }
-    System.out.println("write Object");
     ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_filename)));
     out.writeObject(_library);
-    System.out.println("Object written");
     out.close();
   }
 
@@ -89,7 +89,6 @@ public class LibraryManager {
    * @throws IOException
    */
   public void saveAs(String filename) throws MissingFileAssociationException, IOException {
-    System.out.println("saveAs");
     _filename = filename;
     save();
   }
@@ -101,13 +100,14 @@ public class LibraryManager {
    * @throws ClassNotFoundException
    */
   public void load(String filename) throws FailedToOpenFileException, IOException, ClassNotFoundException {
-    System.out.println("load");
+    try {
+      ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)));
+      _library = (Library) in.readObject();
+      in.close();
+    } catch (FileNotFoundException fnfe) {
+      throw new FailedToOpenFileException(filename);
+    }
     _filename = filename;
-    ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(_filename)));
-    _library = (Library) in.readObject();
-    System.out.println("library loaded");
-    in.close();
-    System.out.println("file closed");
   }
 
   /**
